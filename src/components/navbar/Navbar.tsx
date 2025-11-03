@@ -1,43 +1,23 @@
-import { useContext, type ReactNode } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
-import { ToastAlerta } from "../../utils/ToastAlerta";
+import { Link } from "react-router-dom"
 
-const Navbar = () => {
-  const navigate = useNavigate();
+function Navbar() {
 
-  const { usuario, handleLogout } = useContext(AuthContext);
+    return (
+        <>
+            <div className='w-full flex justify-center py-4
+            			   bg-indigo-900 text-white'>
+            
+                <div className="container flex justify-between text-lg mx-8">
+                    <Link to='/home' className="text-2xl font-bold">Farma Center</Link>
 
-  function logout() {
-    handleLogout();
-    ToastAlerta("Usuário desconectado!", 'info');
-    navigate("/");
-  }
-// ListaCategorias / FormularioCategorias / DeletarCategoria / CardCategoria)
-  let component: ReactNode;
+                    <div className='flex gap-4'>
+                        <Link to='/categorias' className='hover:underline'>Listar categorias</Link>
+                        <Link to='/cadastrarcategoria' className='hover:underline'>Cadastrar categoria</Link>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
 
-  if (usuario.token !== "") {
-    component = (
-      <div className="w-full flex justify-center py-4 bg-indigo-900 text-white">
-        <div className="container flex justify-between text-lg mx-8">
-          <Link to="/home" className="text-2xl font-bold">
-            Farma Center
-          </Link>
-
-          <div className="flex gap-4">
-            <Link to="/temas" className="hover:underline">
-              Categorias
-            </Link>
-            <Link to="/cadastrartema" className="hover:underline">
-              Cadastrar categoria
-            </Link>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  return <>{component}</>;
-};
-
-export default Navbar;
+export default Navbar

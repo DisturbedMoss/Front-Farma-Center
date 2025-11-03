@@ -1,15 +1,12 @@
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  useContext,
   useEffect,
   useState,
   type ChangeEvent,
   type FormEvent,
 } from "react";
-import { AuthContext } from "../../../contexts/AuthContext";
 import { buscar, atualizar, cadastrar } from "../../../services/Service";
 import { ClipLoader } from "react-spinners";
-import { ToastAlerta } from "../../../utils/ToastAlerta";
 import type Categoria from "../../../models/Categoria";
 
 function FormCategoria() {
@@ -18,29 +15,15 @@ function FormCategoria() {
   const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { usuario, handleLogout } = useContext(AuthContext);
-  const token = usuario.token;
-
   const { id } = useParams<{ id: string }>();
 
   async function buscarPorId(id: string) {
     try {
-      await buscar(`/categorias/${id}`, setCategoria, {
-        headers: { Authorization: token },
-      });
+      await buscar(`/categorias/${id}`, setCategoria);
     } catch (error: any) {
-      if (error.toString().includes("401")) {
-        handleLogout();
-      }
+      alert('Não existe essa parada parça')
     }
   }
-
-  useEffect(() => {
-    if (token === "") {
-      ToastAlerta("Você precisa estar logado!", 'info');
-      navigate("/");
-    }
-  }, [token]);
 
   useEffect(() => {
     if (id !== undefined) {
@@ -65,29 +48,17 @@ function FormCategoria() {
 
     if (id !== undefined) {
       try {
-        await atualizar(`/categorias`, categoria, setCategoria, {
-          headers: { Authorization: token },
-        });
-        ToastAlerta("O categoria foi atualizado com sucesso!", 'sucesso');
+        await atualizar(`/categorias`, categoria, setCategoria);
+            alert('A categoria foi atualizado com sucesso!')
       } catch (error: any) {
-        if (error.toString().includes("401")) {
-          handleLogout();
-        } else {
-          ToastAlerta("Erro ao atualizar o categoria.", 'erro');
-        }
+            alert('Erro ao atualizar a categoria.')
       }
     } else {
       try {
-        await cadastrar(`/categorias`, categoria, setCategoria, {
-          headers: { Authorization: token },
-        });
-        ToastAlerta("O categoria foi cadastrado com sucesso!", 'sucesso');
+        await cadastrar(`/categorias`, categoria, setCategoria);
+            alert('A categoria foi cadastrado com sucesso!')
       } catch (error: any) {
-        if (error.toString().includes("401")) {
-          handleLogout();
-        } else {
-          ToastAlerta("Erro ao cadastrar o categoria.", 'erro');
-        }
+            alert('Erro ao cadastrar o categoria.')
       }
     }
     setIsLoading(false);

@@ -3,10 +3,9 @@ import "./App.css";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/home/Home";
-import "react-toastify/dist/ReactToastify.css";
-import ListaCategorias from "./components/categoria/listaCategorias/ListaCategoria";
 import FormCategoria from "./components/categoria/formCategoria/FormCategoria";
 import DeletarCategoria from "./components/categoria/deletarCategoria/DeletarTema";
+import ListaCategoria from "./components/categoria/listaCategorias/ListaCategoria";
 
 function App() {
   return (
@@ -16,7 +15,7 @@ function App() {
 
         <div className="min-h-[80vh]">
           <Routes>
-            <Route path="/categorias" element={<ListaCategorias />} />
+            <Route path="/categorias" element={<ListaCategoria />} />
             <Route path="/home" element={<Home />} />
             <Route path="/cadastrarcategoria" element={<FormCategoria />} />
             <Route path="/editarcategoria/:id" element={<FormCategoria />} />
