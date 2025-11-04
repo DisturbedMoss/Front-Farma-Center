@@ -1,3 +1,4 @@
+import ListaCategoria from "../../components/categoria/listaCategorias/ListaCategoria"
 
 function Home() {
   return (
@@ -24,6 +25,7 @@ function Home() {
                         alt="Imagem Página Home"
                         className="w-2/3"
                     />
+                    <ListaCategoria />
                 </div>
             </div>
         </div>

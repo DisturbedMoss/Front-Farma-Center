@@ -1,10 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  useEffect,
-  useState,
-  type ChangeEvent,
-  type FormEvent,
-} from "react";
+import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import { buscar, atualizar, cadastrar } from "../../../services/Service";
 import { ClipLoader } from "react-spinners";
 import type Categoria from "../../../models/Categoria";
@@ -21,7 +16,7 @@ function FormCategoria() {
     try {
       await buscar(`/categorias/${id}`, setCategoria);
     } catch (error: any) {
-      alert('Não existe essa parada parça')
+      alert("Não existe essa parada parça");
     }
   }
 
@@ -49,16 +44,16 @@ function FormCategoria() {
     if (id !== undefined) {
       try {
         await atualizar(`/categorias`, categoria, setCategoria);
-            alert('A categoria foi atualizado com sucesso!')
+        alert("A categoria foi atualizado com sucesso!");
       } catch (error: any) {
-            alert('Erro ao atualizar a categoria.')
+        alert("Erro ao atualizar a categoria.");
       }
     } else {
       try {
         await cadastrar(`/categorias`, categoria, setCategoria);
-            alert('A categoria foi cadastrado com sucesso!')
+        alert("A categoria foi cadastrado com sucesso!");
       } catch (error: any) {
-            alert('Erro ao cadastrar o categoria.')
+        alert("Erro ao cadastrar o categoria.");
       }
     }
     setIsLoading(false);
@@ -73,13 +68,23 @@ function FormCategoria() {
 
       <form className="w-1/2 flex flex-col gap-4" onSubmit={gerarNovoCategoria}>
         <div className="flex flex-col gap-2">
-          <label htmlFor="descricao">Descrição do categoria</label>
+          <label htmlFor="descricao">Nome da categoria</label>
+          <input
+            type="text"
+            placeholder="Nome da Categoria"
+            name="nome"
+            className="border-2 border-slate-700 rounded p-2"
+            value={categoria.nome}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+          />
+
+          <label htmlFor="descricao">Descrição da categoria</label>
           <input
             type="text"
             placeholder="Descreva aqui seu categoria"
             name="descricao"
             className="border-2 border-slate-700 rounded p-2"
-            value={categoria.descricao}
+            value={categoria.descricao ?? ''}
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
           />
         </div>

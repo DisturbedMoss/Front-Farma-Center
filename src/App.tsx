@@ -4,7 +4,7 @@ import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/home/Home";
 import FormCategoria from "./components/categoria/formCategoria/FormCategoria";
-import DeletarCategoria from "./components/categoria/deletarCategoria/DeletarTema";
+import DeletarCategoria from "./components/categoria/deletarCategoria/DeletarCategoria";
 import ListaCategoria from "./components/categoria/listaCategorias/ListaCategoria";
 
 function App() {
